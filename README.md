@@ -14,9 +14,6 @@ FTP Proxy Protocol Proxy是一个用于代理FTP（File Transfer Protocol）协�
 
 ## 快速开始
 
-### 依赖项
-
-
 ### 安装和运行
 
 1. 克隆或下载本仓库。
