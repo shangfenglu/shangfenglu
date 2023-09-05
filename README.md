@@ -22,6 +22,6 @@ FTP Proxy Protocol Proxy是一个用于代理FTP（File Transfer Protocol）协�
 1. 克隆或下载本仓库。
 
 ```shell
-git clone https://github.com/yourusername/ftp-proxy.git
+
 cd ftp-proxy
 
