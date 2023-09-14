@@ -9,14 +9,18 @@ project(ftp_proxy)
 #生成可gdb                                                                                                                                                         
 add_compile_options(-g )
 
-#指定源文件
-aux_source_directory(source SOURCES)
+# 查找项目的所有源文件
+file(GLOB_RECURSE SOURCES "src/*.c")
 
-#指定头文件
-include_directories(include)
-
-#添加源文件                                                                                                                                    
+# 添加可执行文件
 add_executable(${PROJECT_NAME} ${SOURCES})
+
+# 设置头文件搜索路径
+target_include_directories(${PROJECT_NAME} PRIVATE 
+	include
+	include/service
+	include/client
+)
 
 #添加链接文件                                                                                                                                  
 target_link_libraries(${PROJECT_NAME} pthread )

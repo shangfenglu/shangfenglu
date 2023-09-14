@@ -1,15 +1,12 @@
 #ifndef  __UTILS_
 #define __UTILS_
-
-#include "struct.h"
-
-#include <string.h>
-#include <stdlib.h>
-#include <errno.h>
-#include <poll.h>
+#include <sys/types.h>
 
 #define MEMORY_SIZE 200
-
+struct link;
+struct pollfd;
+struct socket_data;
+struct packet_buf;
 //获得本机ip地址
 int get_local_ip(char* local_ip);
 
@@ -22,6 +19,9 @@ int init_link(struct link* link);
 //初始化packet_buf结构体
 struct packet_buf* init_packet_buf();
 
+//清理session结构体
+int destory_session(struct session* session);
+
 //初始化poll数组
 int init_pollfds(struct pollfd* fds, int num);
 
@@ -31,16 +31,22 @@ int add_pollfds(struct pollfd* fds, int num, const int socket);
 //向poll数组里删除socket
 int del_pollfds(struct pollfd* fds, int num, const int socket);
 
-//追加memory空间
-void* append_memory(void* addr, unsigned int size, unsigned int append_length);
+//向子进程数组中添加pid
+int add_child_pid(pid_t* child_fds, int num, const pid_t child);
+
+//向子进程数组中删除pid
+int del_child_pid(pid_t* child_fds, int num, const pid_t child);
 
 //比较字符串
 int compare_string(const char* dst, const char* src, int length);
 
-//检查是否完整
-int is_complete(char* src);
+//获得index的字符
+char get_char(const char* text, int index);
 
-//将字符串提升为大写
-int string_upper(char* str, int length);
+//拷贝packet_buf
+int copy_packet_buf(struct socket_data* socket_data, struct packet_buf* packet_buf);
 
-#endif  //__UTILS_
+//追加packet_buf
+int append_packet_buf(struct socket_data* socket_data, struct packet_buf* packet_buf);
+
+#endif //__UTILS_
